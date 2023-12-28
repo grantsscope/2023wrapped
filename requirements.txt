@@ -1,0 +1,5 @@
+requests
+duckdb
+streamlit
+plotly
+re
