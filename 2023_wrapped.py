@@ -80,6 +80,7 @@ if address != 'None':
             bcol1, bcol2, bcol3 = st.columns(3)    
             # Displaying the sunburst chart
             bcol2.markdown("### Check out your 2023 contribution burst:")
+            bcol2.markdown("*Tap on a round to drill down*")
             st.plotly_chart(fig, use_container_width=True)
     
             # Aggregating data for top rounds and projects
@@ -93,10 +94,10 @@ if address != 'None':
     
             # Displaying top rounds
             lcol2.markdown("### Your top rounds:")
-            lcol2.dataframe(top_rounds.sort_values(by="amount", ascending=False).head(5), column_config={"unique_round": st.column_config.SelectboxColumn(label='Round'), "amount": st.column_config.NumberColumn(label='Contribution', format='$%.0f')})
+            lcol2.dataframe(top_rounds.sort_values(by="amount", ascending=False).head(5), column_config={"unique_round": st.column_config.SelectboxColumn(label='Round'), "amount": st.column_config.NumberColumn(label='$', format='$%.0f')})
     
             # Displaying top projects
             lcol3.markdown("### Your top projects:")
-            lcol3.dataframe(top_projects.sort_values(by="amount", ascending=False).head(5), column_config={"project": st.column_config.SelectboxColumn(label='Project'),"amount": st.column_config.NumberColumn(label='Contribution', format='$%.0f')})
+            lcol3.dataframe(top_projects.sort_values(by="amount", ascending=False).head(5), column_config={"project": st.column_config.SelectboxColumn(label='Project'),"amount": st.column_config.NumberColumn(label='$', format='$%.0f')})
     
             st.balloons()
