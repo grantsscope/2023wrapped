@@ -21,7 +21,7 @@ LATEST_IPFS_CID = requests.get(LATEST_IPFS_CID_URL).text.strip()
 GATEWAY_URL = f"https://ipfs.filebase.io/ipfs/{LATEST_IPFS_CID}/"
 
 # Get the address
-address = str(col2.text_input('Enter your Ethereum address here starting "0x":',help('ENS not supported, please enter 42-character hexadecimal address starting with "0x"')))
+address = str(col2.text_input('Paste your Ethereum address here starting "0x":',help('ENS not supported, please enter 42-character hexadecimal address starting with "0x"')))
 
 if address != 'None':
     progress_text = "Looking up! Please wait."
@@ -94,10 +94,13 @@ if address != 'None':
     
             # Displaying top rounds
             lcol2.markdown("### Your top rounds:")
-            lcol2.dataframe(top_rounds.sort_values(by="amount", ascending=False).head(5), column_config={"unique_round": st.column_config.SelectboxColumn(label='Round'), "amount": st.column_config.NumberColumn(label='$', format='$%.0f')})
+            lcol2.dataframe(top_rounds.sort_values(by="amount", ascending=False).head(5), column_config={"unique_round": st.column_config.SelectboxColumn(label='Round',width="medium"), "amount": st.column_config.NumberColumn(label='$', format='$%.0f')})
     
             # Displaying top projects
             lcol3.markdown("### Your top projects:")
-            lcol3.dataframe(top_projects.sort_values(by="amount", ascending=False).head(5), column_config={"project": st.column_config.SelectboxColumn(label='Project'),"amount": st.column_config.NumberColumn(label='$', format='$%.0f')})
+            lcol3.dataframe(top_projects.sort_values(by="amount", ascending=False).head(5), column_config={"project": st.column_config.SelectboxColumn(label='Project',width="medium"),"amount": st.column_config.NumberColumn(label='$', format='$%.0f')})
     
             st.balloons()
+
+    st.markdown("*This is one of the experiments for the project [GrantsScope](http://grantsscope.xyz/) aiming to improve the discoverability of projects and reduce information asymmetry in public goods funding. Credits to [Gitcoin Grants Data Portal](https://davidgasquez.github.io/gitcoin-data/) by [David Gasquez](https://twitter.com/davidgasquez) that serves as the data staging layer for this reporting. To report issues, ping [here](https://t.me/rohitmalekar)*")    
+            
