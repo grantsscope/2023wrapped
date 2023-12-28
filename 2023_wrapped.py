@@ -90,7 +90,7 @@ if address != 'None':
             top_projects = projects.groupby('project').sum()
     
             # Setting up Streamlit columns
-            lcol1, lcol2, lcol3, lcol4 = st.columns([1,2,2,1])
+            lcol1, lcol2, lcol3, lcol4 = st.columns([1,1,1,1])
     
             # Displaying top rounds
             lcol2.markdown("### Your top rounds:")
