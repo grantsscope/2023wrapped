@@ -50,9 +50,9 @@ if address != 'None':
                 any_value(projects.project_twitter) AS project_twitter,
                 round(sum(votes.amount_in_usd), 0) AS amount
             FROM '{GATEWAY_URL}/allo_donations.parquet' AS votes,
-                 '{GATEWAY_URL}/allo_rounds.parquet' AS round,
+                 '{GATEWAY_URL}/allo_rounds.parquet' AS rounds,
                  '{GATEWAY_URL}/allo_projects.parquet' AS projects
-            WHERE votes.round_id = round.id
+            WHERE votes.round_id = rounds.id
               AND votes.project_id = projects.id
               AND strftime('%Y', CAST(donations_start_time AS TIMESTAMP)) = '2023'
             GROUP BY votes.donor_address, round.round_metadata_name, strftime('%B %Y', CAST(donations_start_time AS TIMESTAMP)), projects.title        
