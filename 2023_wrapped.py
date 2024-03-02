@@ -54,7 +54,7 @@ if address != 'None':
                  '{GATEWAY_URL}/allo_projects.parquet' AS projects
             WHERE votes.round_id = round.id
               AND votes.project_id = projects.id
-              AND strftime('%Y', CAST(round_start_time AS TIMESTAMP)) = '2023'
+              AND strftime('%Y', CAST(donations_start_time AS TIMESTAMP)) = '2023'
             GROUP BY votes.donor_address, round.round_metadata_name, strftime('%B %Y', CAST(donations_start_time AS TIMESTAMP)), projects.title        
             """
 
