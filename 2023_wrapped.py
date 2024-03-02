@@ -41,7 +41,7 @@ if address != 'None':
         my_bar.progress(10, text='Valid address found. Searching for your contributions...:mag_right:. Hang tight!')
         
         # Database querying
-    QUERY = f"""
+        QUERY = f"""
             SELECT
                 votes.donor_address AS voter,
                 round.round_metadata_name AS round,
