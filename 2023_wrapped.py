@@ -44,7 +44,7 @@ if address != 'None':
         QUERY = f"""
             SELECT
                 votes.donor_address AS voter,
-                round.round_metadata_name AS round,
+                rounds.round_metadata_name AS round,
                 strftime('%B %Y', CAST(donations_start_time AS TIMESTAMP)) AS round_start,
                 projects.title AS project,
                 any_value(projects.project_twitter) AS project_twitter,
@@ -55,7 +55,7 @@ if address != 'None':
             WHERE votes.round_id = rounds.id
               AND votes.project_id = projects.id
               AND strftime('%Y', CAST(donations_start_time AS TIMESTAMP)) = '2023'
-            GROUP BY votes.donor_address, round.round_metadata_name, strftime('%B %Y', CAST(donations_start_time AS TIMESTAMP)), projects.title        
+            GROUP BY votes.donor_address, rounds.round_metadata_name, strftime('%B %Y', CAST(donations_start_time AS TIMESTAMP)), projects.title        
             """
 
         # All results for 2023
