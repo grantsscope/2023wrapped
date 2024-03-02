@@ -16,11 +16,12 @@ col2.markdown('2023 may be over, but the impact of your donations will continue 
 col2.markdown('For other wins for Gitcoin and community, check out [2023: Year in Review](https://2023.gitcoin.co/). To report issues, ping on Telegram [here](https://t.me/rohitmalekar).')
 
 # Fetch the latest IPFS CID from a specified URL
-LATEST_IPFS_CID_URL = 'https://raw.githubusercontent.com/davidgasquez/gitcoin-grants-data-portal/main/data/IPFS_CID'
-LATEST_IPFS_CID = requests.get(LATEST_IPFS_CID_URL).text.strip()
+#LATEST_IPFS_CID_URL = 'https://raw.githubusercontent.com/davidgasquez/gitcoin-grants-data-portal/main/data/IPFS_CID'
+#LATEST_IPFS_CID = requests.get(LATEST_IPFS_CID_URL).text.strip()
 
 # Construct the gateway URL
-GATEWAY_URL = f'https://ipfs.filebase.io/ipfs/{LATEST_IPFS_CID}/'
+#GATEWAY_URL = f'https://ipfs.filebase.io/ipfs/{LATEST_IPFS_CID}/'
+GATEWAY_URL = "https://k51qzi5uqu5dhn3p5xdkp8n6azd4l1mma5zujinkeewhvuh5oq4qvt7etk9tvc.ipns.cf-ipfs.com/data"
 
 # Get the Ethereum address from user input
 address = col2.text_input('Paste your Ethereum address here starting "0x":', 
