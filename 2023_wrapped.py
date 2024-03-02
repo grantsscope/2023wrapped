@@ -41,23 +41,22 @@ if address != 'None':
         my_bar.progress(10, text='Valid address found. Searching for your contributions...:mag_right:. Hang tight!')
         
         # Database querying
-        QUERY = f"""
-        SELECT
-            votes.voter AS voter,
-            round.name AS round,
-            strftime(to_timestamp(round_start_time),'%B %Y') AS round_start,
-            projects.title AS project,
-            any_value(projects.project_twitter) AS project_twitter,
-            round(sum(votes.amount_usd), 0) AS amount
-        FROM '{GATEWAY_URL}/round_votes.parquet' AS votes,
-             '{GATEWAY_URL}/rounds.parquet' AS round,
-             '{GATEWAY_URL}/projects.parquet' AS projects
-        WHERE votes.round_id = lower(round.id)
-          AND votes.project_id = projects.project_id
-          AND round_start_time >= 1672531200
-          AND round_end_time <= 1703980800
-        GROUP BY votes.voter, round.name, strftime(to_timestamp(round_start_time),'%B %Y'), projects.title
-        """
+    QUERY = f"""
+            SELECT
+                votes.donor_address AS voter,
+                round.round_metadata_name AS round,
+                strftime('%B %Y', CAST(donations_start_time AS TIMESTAMP)) AS round_start,
+                projects.title AS project,
+                any_value(projects.project_twitter) AS project_twitter,
+                round(sum(votes.amount_in_usd), 0) AS amount
+            FROM '{GATEWAY_URL}/allo_donations.parquet' AS votes,
+                 '{GATEWAY_URL}/allo_rounds.parquet' AS round,
+                 '{GATEWAY_URL}/allo_projects.parquet' AS projects
+            WHERE votes.round_id = round.id
+              AND votes.project_id = projects.id
+              AND strftime('%Y', CAST(round_start_time AS TIMESTAMP)) = '2023'
+            GROUP BY votes.donor_address, round.round_metadata_name, strftime('%B %Y', CAST(donations_start_time AS TIMESTAMP)), projects.title        
+            """
 
         # All results for 2023
         query_all_result = duckdb.sql(QUERY).df()
